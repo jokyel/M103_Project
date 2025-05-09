@@ -1,4 +1,4 @@
-# M103_Project
+# M103 Project
 
 This is the repository for our project in MATH 103, where we create a Python program for students to have hands-on experience on the following basic ciphers:
   - Caesar cipher
