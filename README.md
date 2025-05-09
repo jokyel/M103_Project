@@ -45,7 +45,7 @@ Similar to the Caesar cipher, the Affine cipher shifts each letter's index by a 
   - E(x) = ax + b mod 26
   - D(x) = a<sup>-1</sup>(x-b) mod 26
 
-where x is the index of a character in the alphabet, and a^-1 is the modular inverse of a. Note that a must be coprime with 26, otherwise the cipher is not reversible.
+where x is the index of a character in the alphabet, and a<sup>-1</sup> is the modular inverse of a. Note that a must be coprime with 26, otherwise the cipher is not reversible.
 
 For example, we have a text `abcde`. If a = 5 and b = 10, then
 
@@ -63,21 +63,21 @@ So, `abcde` is encrypted to `kpuze`. Deciphering `kpuze` becomes:
   - z -> 25 : 21(25 - 10) ≡ 3 mod 26 -> d
   - e -> 4 : 21(4 - 10) ≡ -126 ≡ 4 mod 26 -> e
 
-Note that the modular inverse of a = 5 is a^-1 = 21.
+Note that the modular inverse of a = 5 is a<sup>-1</sup> = 21.
 
 ### Vigenère cipher
 
 The Vigenère cipher, at its core, uses a key. However, the idea of it is that it is a combination of multiple Caesar ciphers. The person can input a text, and then input a key. The cipher itself will use the indeces of each letter in the key to shift each character of the text correspondingly. The formula is
 
-E<subi</sub> = (T<subi</sub> + K<subi</sub>) mod 26
+E<sub>i</sub> = (T<sub>i</sub> + K<sub>i</sub>) mod 26
 
-where T<subi</sub> is the index of the ith letter in the text, and K<subi</sub> is the index of the ith letter in the key, corresponding to the alphabet. Note that a = 0, b = 1, … z = 26. The resulting E<subi</sub> is the index of the ith letter of the encrypted text.
+where T<sub>i</sub> is the index of the ith letter in the text, and K<sub>i</sub> is the index of the ith letter in the key, corresponding to the alphabet. Note that a = 0, b = 1, … z = 26. The resulting E<sub>i</sub> is the index of the ith letter of the encrypted text.
 
 For decryption, the formula is
 
-D_i = (C<subi</sub> - K<subi</sub>) mod 26
+D_i = (C<sub>i</sub> - K<sub>i</sub>) mod 26
 
-where C<subi</sub> is the index of the ith letter in the encrypted text, and K<subi</sub> is the index of the ith letter in the key, corresponding to the alphabet.
+where C<sub>i</sub> is the index of the ith letter in the encrypted text, and K<sub>i</sub> is the index of the ith letter in the key, corresponding to the alphabet.
 
 For example, with text `abcd` and key `efgh`:
 
