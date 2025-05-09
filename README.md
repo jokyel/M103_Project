@@ -17,22 +17,33 @@ For example, let's say we have a text `abc`. The person encrypting can shift the
 
 Each letter has an index in the alphabet, from 0 to 25. A -> 0, B -> 1, … , Z -> 25.
 The idea of the "shift" is to add the index of each character in the text by a specified number. In the text `abc`:
+
   - a -> 0
   - b -> 1
   - c -> 2
+
 Once shifted by 3, it then becomes:
+
   - a -> 0 + 3 = 3 -> d
   - b -> 1 + 3 = 4 -> e
   - c -> 2 + 3 = 5 -> f
 
 The shift is of modulo 26. So a shift by 27, by modular arithmetic, is just a shift by 1 (27 ≡ 1 mod 26).
 
+Deciphering a text using the Caesar cipher can be done by reverting the "shift". For example, with the encrypted code `def`, this can be shifted back by 3:
+
+  - d -> 3 - 3 = 0 -> a
+  - e -> 4 - 3 = 1 -> b
+  - f -> 5 - 3 = 2 -> c
+
+So the result is `abc`.
+
 ### Affine cipher
 
 Similar to the Caesar cipher, the Affine cipher shifts each letter's index by a specified amount, but utilizes multiplicative and additive shifting. The person encrypting uses two numbers, a and b, such that
 
   - E(x) = ax + b mod 26
-  - D(x) = a^-1(x-b) mod 26
+  - D(x) = a<sup>-1</sup>(x-b) mod 26
 
 where x is the index of a character in the alphabet, and a^-1 is the modular inverse of a. Note that a must be coprime with 26, otherwise the cipher is not reversible.
 
@@ -58,15 +69,15 @@ Note that the modular inverse of a = 5 is a^-1 = 21.
 
 The Vigenère cipher, at its core, uses a key. However, the idea of it is that it is a combination of multiple Caesar ciphers. The person can input a text, and then input a key. The cipher itself will use the indeces of each letter in the key to shift each character of the text correspondingly. The formula is
 
-E_i = (T_i + K_i) mod 26
+E<subi</sub> = (T<subi</sub> + K<subi</sub>) mod 26
 
-where T_i is the index of the ith letter in the text, and K_i is the index of the ith letter in the key, corresponding to the alphabet. Note that a = 0, b = 1, … z = 26. The resulting E_i is the index of the ith letter of the encrypted text.
+where T<subi</sub> is the index of the ith letter in the text, and K<subi</sub> is the index of the ith letter in the key, corresponding to the alphabet. Note that a = 0, b = 1, … z = 26. The resulting E<subi</sub> is the index of the ith letter of the encrypted text.
 
 For decryption, the formula is
 
-D_i = (C_i - K_i) mod 26
+D_i = (C<subi</sub> - K<subi</sub>) mod 26
 
-where C_i is the index of the ith letter in the encrypted text, and K_i is the index of the ith letter in the key, corresponding to the alphabet.
+where C<subi</sub> is the index of the ith letter in the encrypted text, and K<subi</sub> is the index of the ith letter in the key, corresponding to the alphabet.
 
 For example, with text `abcd` and key `efgh`:
 
