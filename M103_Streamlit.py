@@ -78,22 +78,23 @@ def vigenere_cipher(text, key, mode='encrypt'):
     
     return ''.join(result)
 
-st.title("Cipher Web App")
+st.title("M103 Project: Ciphers")
+st.subheader("This program serves as a playground to experiment with the three listed encryption techniques.")
 
 cipher = st.selectbox("Select Cipher", ["Caesar", "Affine", "Vigenere"])
 text = st.text_input("Enter Text")
 action = st.radio("Action", ["Encrypt", "Decrypt"])
 
 if cipher == "Caesar":
-    shift = st.number_input("Enter Shift (integer)", value=0, step=1)
+    shift = st.number_input("Enter shift (integer)", value=0, step=1)
     if st.button("Process"):
         shift = int(shift)
         result = caesar_cipher(text, shift) if action == "Encrypt" else caesar_cipher(text, -shift)
         st.write("Result:", result)
 
 elif cipher == "Affine":
-    shift1 = st.number_input("Enter Shift1 (integer)", value=1, step=1)
-    shift2 = st.number_input("Enter Shift2 (integer)", value=0, step=1)
+    shift1 = st.number_input("Enter a (integer)", value=1, step=1)
+    shift2 = st.number_input("Enter b (integer)", value=0, step=1)
     if st.button("Process"):
         shift1, shift2 = int(shift1), int(shift2)
         if action == "Encrypt":
@@ -103,7 +104,7 @@ elif cipher == "Affine":
         st.write("Result:", result)
 
 elif cipher == "Vigenere":
-    key = st.text_input("Enter Key (string)")
+    key = st.text_input("Enter key (string)")
     if st.button("Process"):
         result = vigenere_cipher(text, key, mode="encrypt" if action == "Encrypt" else "decrypt")
         st.write("Result:", result)
