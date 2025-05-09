@@ -59,6 +59,13 @@ def vigenere_cipher(text, key, mode='encrypt'):
         return ""
     key_indices = [ord(char) - ord('a') for char in key]
     
+    for i, char in enumerate(key):
+        if char.isalpha(): continue;
+        else: 
+            st.error("The key must only contain characters from the alphabet.")
+            return ""
+
+
     for i, char in enumerate(text):
         if char.isalpha():
             is_upper = char.isupper()
