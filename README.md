@@ -5,15 +5,15 @@ This is the repository for our project in MATH 103, where we create a Python pro
   - Affine cipher
   - Vigenère cipher
 
-You can access the program [here](https://m103project-caesar-affine-vigenere-ciphers.streamlit.app)!
+You can access the program [here](https://m103project-ciphers.streamlit.app)!
 
 ## Overview of the ciphers
 
 Take note of the following:
   - Each letter in the alphabet has a unique index, from 0 to 25. A = 0, B = 1, C = 2, … Z = 25.
-  - To avoid complications with indexing, the text being encrypted/decrypted (and key for the Vigenère cipher) WILL IGNORE any non-alphabetical characters, like numbers and special characters.
-    - For example, if a person were to use a Caesar cipher to encrypt `a1b2c3`, and the "shift" integer is 3, the program will only return `d1e2f3`.
   - "Plaintext" refers to the original text, while "ciphertext" refers to the encrypted text.
+  - To avoid complications with indexing, the ciphers WILL IGNORE any non-alphabetical characters in the plaintext, ciphertext, and key, like numbers and special characters.
+    - For example, if a person were to use a Caesar cipher with plaintext `a1b2c3`, and the "shift" integer is 3, the program will only return `d1e2f3`.
 
 ### Caesar cipher
 
@@ -121,9 +121,9 @@ Note that the key's length does not necessarily have to be equal to the plaintex
 
 The webpage has these elements:
   - A dropdown that includes the three ciphers (Caesar, Affine, Vigenère) the user may use;
-  - A text field where the user can input any string of text;
+  - A text field where the user can input a plaintext;
   - An option to either encrypt or decrypt the text; and
-  - A button to process the text and encrypt/decrypt the inputted text with the parameters set.
+  - A button to process the text and encrypt/decrypt the plaintext with the set parameters.
 
 Each dropdown option the user chooses will change the webpage's elements.
   - If the user chooses to do a Caesar cipher, the user can either input the "shift" integer, or use the increment buttons to the right of the text box to increase or decrease the shift integer by 1.
