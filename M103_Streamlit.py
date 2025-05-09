@@ -25,9 +25,6 @@ def mod_inverse(a, m):
     return None
 
 def affine_cipher_E(text, shift1, shift2):
-    if gcd(shift1, 26) != 1:
-        st.error("A must be coprime to 26.")
-        return ""
     result = ""
     for char in text:
         if char.isalpha():
@@ -40,17 +37,13 @@ def affine_cipher_E(text, shift1, shift2):
     return result
 
 def affine_cipher_D(text, shift1, shift2):
-    if gcd(shift1, 26) != 1:
-        st.error("A must be coprime to 26.")
-        return ""
     shift_inv = mod_inverse(shift1, 26)
     result = ""
     for char in text:
         if char.isalpha():
             is_upper = char.isupper()
             char = char.lower()
-            offset = ord('A') if is_upper else ord('a')
-            decrypted_char = chr(((shift_inv * ((ord(char) - offset) - shift2)) % 26) + offset)
+            decrypted_char = chr(((shift_inv * ((ord(char) - ord('a')) - shift2)) % 26) + ord('a'))
             result += decrypted_char.upper() if is_upper else decrypted_char
         else:
             result += char
