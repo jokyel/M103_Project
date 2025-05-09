@@ -13,13 +13,14 @@ Take note of the following:
   - Each letter in the alphabet has a unique index, from 0 to 25. A = 0, B = 1, C = 2, … Z = 25.
   - To avoid complications with indexing, the text being encrypted/decrypted (and key for the Vigenère cipher) WILL IGNORE any non-alphabetical characters, like numbers and special characters.
     - For example, if a person were to use a Caesar cipher to encrypt `a1b2c3`, and the "shift" integer is 3, the program will only return `d1e2f3`.
+  - "Plaintext" refers to the original text, while "ciphertext" refers to the encrypted text.
 
 ### Caesar cipher
 
 Widely regarded as one of the most basic and historically significant ciphers, the Caesar cipher is a building block in classical cryptography. The key idea is that an encoded text is encrypted by having its characters "shifted" to the right by a number of letters in the alphabet. If the shift is to the left, the "shift" integer is negative.
 
-For example, let's say we have a text `abc`. The person encrypting can shift the letters by 3, so that the text is encrypted as `def`.
-The idea of the "shift" is to add the index of each character in the text by a specified number. In the text `abc`:
+For example, let's say we have a plaintext `abc`. The person encrypting can shift the letters by 3, so that it is encrypted as `def`.
+The idea of the "shift" is to add the index of each character in the text by a specified number. In the plaintext `abc`:
 
   - a -> 0
   - b -> 1
@@ -33,13 +34,13 @@ Once shifted by 3, it then becomes:
 
 The shift is of modulo 26. So a shift by 27, by modular arithmetic, is just a shift by 1 (27 ≡ 1 mod 26).
 
-Deciphering a text using the Caesar cipher can be done by reverting the "shift". For example, with the encrypted code `def`, this can be shifted back by 3:
+Deciphering a text using the Caesar cipher can be done by reverting the "shift". For example, with the ciphertext `def`, this can be shifted back by 3:
 
   - d -> 3 - 3 = 0 -> a
   - e -> 4 - 3 = 1 -> b
   - f -> 5 - 3 = 2 -> c
 
-So the result is `abc`.
+So the result is the plaintext `abc`.
 
 ### Affine cipher
 
@@ -50,7 +51,7 @@ Similar to the Caesar cipher, the Affine cipher shifts each letter's index by a 
 
 where x is the index of a character in the alphabet, and A<sup>-1</sup> is the modular inverse of A. Note that A must be coprime with 26 to allow the ciphering process to be reversible, since the modular inverse of A mod M only exists if A and M are coprime.
 
-For example, we have a text `abcde`. If A = 5 and B = 10, then
+For example, we have a plaintext `abcde`. If A = 5 and B = 10, then
 
   - a -> 0 : 5(0) + 10 ≡ 10 mod 26 -> k
   - b -> 1 : 5(1) + 10 ≡ 15 mod 26 -> p
@@ -70,19 +71,19 @@ Note that the modular inverse of A = 5 is A<sup>-1</sup> = 21.
 
 ### Vigenère cipher
 
-The Vigenère cipher, at its core, uses a key. However, the idea of it is that it is a combination of multiple Caesar ciphers. The person can input a text, and then input a key. The cipher itself will use the indeces of each letter in the key to shift each character of the text correspondingly. The formula is
+The Vigenère cipher, at its core, uses a key. However, the idea of it is that it is a combination of multiple Caesar ciphers. The person can input plaintext, and then input a key. The cipher itself will use the indeces of each letter in the key to shift each character of the text correspondingly. The formula is
 
 E<sub>i</sub> = (T<sub>i</sub> + K<sub>i</sub>) mod 26
 
-where T<sub>i</sub> is the index of the ith letter in the text, and K<sub>i</sub> is the index of the ith letter in the key, corresponding to the alphabet. Note that a = 0, b = 1, … z = 26. The resulting E<sub>i</sub> is the index of the ith letter of the encrypted text.
+where T<sub>i</sub> is the index of the ith letter in the text, and K<sub>i</sub> is the index of the ith letter in the key, corresponding to the alphabet. Note that a = 0, b = 1, … z = 26. The resulting E<sub>i</sub> is the index of the ith letter of the ciphertext.
 
 For decryption, the formula is
 
 D<sub>i</sub> = (C<sub>i</sub> - K<sub>i</sub>) mod 26
 
-where C<sub>i</sub> is the index of the ith letter in the encrypted text, and K<sub>i</sub> is the index of the ith letter in the key, corresponding to the alphabet.
+where C<sub>i</sub> is the index of the ith letter in the encrypted text, and K<sub>i</sub> is the index of the ith letter in the key, corresponding to the alphabet. The resulting D<sub>i</sub> is the plaintext.
 
-For example, with text `abcd` and key `efgh`:
+For example, with plaintext `abcd` and key `efgh`:
 
 - a = 0; e = 4
   - E = (0 + 4) ≡ 4 mod 26
@@ -97,7 +98,7 @@ For example, with text `abcd` and key `efgh`:
   - E = (3 + 7) ≡ 10 mod 26
   - d -> k
 
-The resulting text is `egik`. For decryption, with the same key:
+The resulting ciphertext is `egik`. For decryption, with the same key:
 
 - e = 4; e = 4
   - D = (4 - 4) ≡ 0 mod 26
@@ -112,7 +113,9 @@ The resulting text is `egik`. For decryption, with the same key:
   - D = (10 - 7) ≡ 3 mod 26
   - k -> d
 
-Which results in `abcd`.
+Which results in the plaintext `abcd`.
+
+Note that the key's length does not necessarily have to be equal to the plaintext's length. For example, if the plaintext is `abcd` and the key is `ab`, then the cipher will use `abab` as the key. Similarly, if the plaintext is `abcd` and the key is `efghi`, then the cipher will use `efgh` as the key.
 
 ## Instruction Manual
 
