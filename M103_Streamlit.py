@@ -31,8 +31,10 @@ def affine_cipher_E(text, shift1, shift2):
     result = ""
     for char in text:
         if char.isalpha():
-            offset = 65 if char.isupper() else 97
-            result += chr(((shift1 * (ord(char) - offset) + shift2) % 26) + offset)
+            is_upper = char.isupper()
+            char = char.lower()
+            encrypted_char = chr(((shift1 * ((ord(char) - ord('a')) - shift2)) % 26) + ord('a'))
+            result += encrypted_char.upper() if is_upper else encrypted_char
         else:
             result += char
     return result
@@ -45,8 +47,10 @@ def affine_cipher_D(text, shift1, shift2):
     result = ""
     for char in text:
         if char.isalpha():
-            offset = 65 if char.isupper() else 97
-            result += chr(((shift_inv * ((ord(char) - offset) - shift2)) % 26) + offset)
+            is_upper = char.isupper()
+            char = char.lower()
+            decrypted_char = chr(((shift_inv * ((ord(char) - ord('a')) - shift2)) % 26) + ord('a'))
+            result += decrypted_char.upper() if is_upper else decrypted_char
         else:
             result += char
     return result
