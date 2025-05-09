@@ -78,7 +78,7 @@ def vigenere_cipher(text, key, mode='encrypt'):
 st.title("M103 Project: Ciphers")
 st.subheader("This program serves as a playground to experiment with the three listed encryption techniques.")
 
-cipher = st.selectbox("Select Cipher", ["Caesar", "Affine", "Vigenere"])
+cipher = st.selectbox("Select Cipher", ["Caesar", "Affine", "Vigenère"])
 text = st.text_input("Enter Text")
 action = st.radio("Action", ["Encrypt", "Decrypt"])
 
@@ -103,7 +103,7 @@ elif cipher == "Affine":
             result = affine_cipher_D(text, shift1, shift2)
         st.write("Result:", result)
 
-elif cipher == "Vigenere":
+elif cipher == "Vigenère":
     key = st.text_input("Enter key (string)")
     if st.button("Process"):
         result = vigenere_cipher(text, key, mode="encrypt" if action == "Encrypt" else "decrypt")
