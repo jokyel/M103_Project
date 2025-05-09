@@ -119,7 +119,8 @@ Which results in `abcd`.
 The webpage has these elements:
   - A dropdown that includes the three ciphers (Caesar, Affine, Vigenère) the user may use;
   - A text field where the user can input any string of text;
-  - And an option to either encrypt or decrypt the text.
+  - An option to either encrypt or decrypt the text; and
+  - A button to process the text and encrypt/decrypt the inputted text with the parameters set.
 
 Each dropdown option the user chooses will change the webpage's elements.
   - If the user chooses to do a Caesar cipher, the user can either input the "shift" integer, or use the increment buttons to the right of the text box to increase or decrease the shift integer by 1.
