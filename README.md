@@ -75,7 +75,7 @@ where T<sub>i</sub> is the index of the ith letter in the text, and K<sub>i</sub
 
 For decryption, the formula is
 
-D_i = (C<sub>i</sub> - K<sub>i</sub>) mod 26
+D<sub>i</sub> = (C<sub>i</sub> - K<sub>i</sub>) mod 26
 
 where C<sub>i</sub> is the index of the ith letter in the encrypted text, and K<sub>i</sub> is the index of the ith letter in the key, corresponding to the alphabet.
 
