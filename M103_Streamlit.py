@@ -26,7 +26,7 @@ def mod_inverse(a, m):
 
 def affine_cipher_E(text, shift1, shift2):
     if gcd(shift1, 26) != 1:
-        st.error("Shift1 must be coprime to 26.")
+        st.error("A must be coprime to 26.")
         return ""
     result = ""
     for char in text:
@@ -39,12 +39,9 @@ def affine_cipher_E(text, shift1, shift2):
 
 def affine_cipher_D(text, shift1, shift2):
     if gcd(shift1, 26) != 1:
-        st.error("Shift1 must be coprime to 26.")
+        st.error("A must be coprime to 26.")
         return ""
     shift_inv = mod_inverse(shift1, 26)
-    if shift_inv is None:
-        st.error(f"{shift1} does not have a multiplicative inverse mod 26.")
-        return ""
     result = ""
     for char in text:
         if char.isalpha():
@@ -85,6 +82,8 @@ cipher = st.selectbox("Select Cipher", ["Caesar", "Affine", "Vigenere"])
 text = st.text_input("Enter Text")
 action = st.radio("Action", ["Encrypt", "Decrypt"])
 
+valid_a_values = [x for x in range (1,26) if gcd(x,26) == 1]
+
 if cipher == "Caesar":
     shift = st.number_input("Enter shift (integer)", value=0, step=1)
     if st.button("Process"):
@@ -93,8 +92,9 @@ if cipher == "Caesar":
         st.write("Result:", result)
 
 elif cipher == "Affine":
-    shift1 = st.number_input("Enter a (integer)", value=1, step=1)
-    shift2 = st.number_input("Enter b (integer)", value=0, step=1)
+    shift1 = st.selectbox("Select A (integer)", valid_a_values)
+    shift2 = st.number_input("Enter B (integer)", value=0, step=1)
+    st.text("Note that A can only be a coprime of 26.")
     if st.button("Process"):
         shift1, shift2 = int(shift1), int(shift2)
         if action == "Encrypt":
