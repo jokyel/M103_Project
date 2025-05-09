@@ -7,15 +7,18 @@ This is the repository for our project in MATH 103, where we create a Python pro
 
 You can access the program [here](https://m103project-caesar-affine-vigenere-ciphers.streamlit.app)!
 
-## Brief Overview of the ciphers
+## Overview of the ciphers
+
+Take note of the following:
+  - Each letter in the alphabet has a unique index, from 0 to 25. A = 0, B = 1, C = 2, … Z = 25.
+  - To avoid complications with indexing, the text being encrypted/decrypted (and key for the Vigenère cipher) WILL IGNORE any non-alphabetical characters, like numbers and special characters.
+    - For example, if a person were to use a Caesar cipher to encrypt `a1b2c3`, and the "shift" integer is 3, the program will only return `d1e2f3`.
 
 ### Caesar cipher
 
-Widely regarded as one of the most basic and historically significant ciphers, the Caesar cipher is a building block in classical cryptography. The key idea is that an encoded text is encrypted by having its characters "shifted" by a number of letters in the alphabet.
+Widely regarded as one of the most basic and historically significant ciphers, the Caesar cipher is a building block in classical cryptography. The key idea is that an encoded text is encrypted by having its characters "shifted" to the right by a number of letters in the alphabet. If the shift is to the left, the "shift" integer is negative.
 
 For example, let's say we have a text `abc`. The person encrypting can shift the letters by 3, so that the text is encrypted as `def`.
-
-Each letter has an index in the alphabet, from 0 to 25. A -> 0, B -> 1, … , Z -> 25.
 The idea of the "shift" is to add the index of each character in the text by a specified number. In the text `abc`:
 
   - a -> 0
@@ -40,14 +43,14 @@ So the result is `abc`.
 
 ### Affine cipher
 
-Similar to the Caesar cipher, the Affine cipher shifts each letter's index by a specified amount, but utilizes multiplicative and additive shifting. The person encrypting uses two numbers, a and b, such that
+Similar to the Caesar cipher, the Affine cipher shifts each letter's index by a specified amount, but utilizes multiplicative and additive shifting. The person encrypting uses two numbers, A and B, such that
 
-  - E(x) = ax + b mod 26
-  - D(x) = a<sup>-1</sup>(x-b) mod 26
+  - E(x) = Ax + B mod 26
+  - D(x) = A<sup>-1</sup>(x-B) mod 26
 
-where x is the index of a character in the alphabet, and a<sup>-1</sup> is the modular inverse of a. Note that a must be coprime with 26, otherwise the cipher is not reversible.
+where x is the index of a character in the alphabet, and A<sup>-1</sup> is the modular inverse of A. Note that A must be coprime with 26 to allow the ciphering process to be reversible, since the modular inverse of A mod M only exists if A and M are coprime.
 
-For example, we have a text `abcde`. If a = 5 and b = 10, then
+For example, we have a text `abcde`. If A = 5 and B = 10, then
 
   - a -> 0 : 5(0) + 10 ≡ 10 mod 26 -> k
   - b -> 1 : 5(1) + 10 ≡ 15 mod 26 -> p
@@ -63,7 +66,7 @@ So, `abcde` is encrypted to `kpuze`. Deciphering `kpuze` becomes:
   - z -> 25 : 21(25 - 10) ≡ 3 mod 26 -> d
   - e -> 4 : 21(4 - 10) ≡ -126 ≡ 4 mod 26 -> e
 
-Note that the modular inverse of a = 5 is a<sup>-1</sup> = 21.
+Note that the modular inverse of A = 5 is A<sup>-1</sup> = 21.
 
 ### Vigenère cipher
 
@@ -110,3 +113,18 @@ The resulting text is `egik`. For decryption, with the same key:
   - k -> d
 
 Which results in `abcd`.
+
+## Instruction Manual
+
+The webpage has these elements:
+  - A dropdown that includes the three ciphers (Caesar, Affine, Vigenère) the user may use;
+  - A text field where the user can input any string of text;
+  - And an option to either encrypt or decrypt the text.
+
+Each dropdown option the user chooses will change the webpage's elements.
+  - If the user chooses to do a Caesar cipher, the user can either input the "shift" integer, or use the increment buttons to the right of the text box to increase or decrease the shift integer by 1.
+  - If the user chooses to do an Affine cipher, the user can input two shift integers, A and B.
+      - A is a dropdown element, where the choices are integers coprime with 26.
+      - B is a textbox element, where the user can either input an integer, or use the increment buttons, similar to the Caesar cipher's "shift" integer input.
+  - If the user chooses to do a Vigenère cipher, the user is required to input a string key of at least length 2. Should the user not input a string key, it would return an error forcing the user to input one. Intrinsically, this is because the code would ultimately return an error regarding the divisibility of zero. Similarly, a key of only length 1 will just be equivalent to the Caesar cipher, with the "shift" integer being the index of the letter inputted.
+
