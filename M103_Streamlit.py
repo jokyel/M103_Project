@@ -54,6 +54,8 @@ def vigenere_cipher(text, key, mode='encrypt'):
     result = []
     key = key.lower()
     key_length = len(key)
+    if key_length == 0:
+        st.error("Please enter a key.")
     key_indices = [ord(char) - ord('a') for char in key]
     
     for i, char in enumerate(text):
