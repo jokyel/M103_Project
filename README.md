@@ -10,7 +10,7 @@ You can access the program [here](https://m103project-ciphers.streamlit.app)!
 ## Overview of the ciphers
 
 Take note of the following:
-  - Each letter in the alphabet has a unique index, from 0 to 25. A = 0, B = 1, C = 2, … Z = 25.
+  - Each letter in the alphabet has a unique index, from 0 to 25. A = 0, B = 1, C = 2, … Z = 25. For the purpose of simplifying the program, letter casing is negligible; A = a = 0.
   - "Plaintext" refers to the original text, while "ciphertext" refers to the encrypted text.
   - To avoid complications with indexing, the ciphers WILL IGNORE any non-alphabetical characters in the plaintext, ciphertext, and key, like numbers and special characters.
     - For example, if a person were to use a Caesar cipher with plaintext `a1b2c3`, and the "shift" integer is 3, the program will only return `d1e2f3`.
