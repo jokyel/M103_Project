@@ -7,6 +7,21 @@ This is the repository for our project in MATH 103, where we create a Python pro
 
 You can access the program [here](https://m103project-ciphers.streamlit.app)!
 
+## Instruction Manual
+
+The webpage has these elements:
+  - A dropdown that includes the three ciphers (Caesar, Affine, Vigenère) the user may use;
+  - A text field where the user can input a plaintext;
+  - An option to either encrypt or decrypt the text; and
+  - A button to process the text and encrypt/decrypt the plaintext with the set parameters.
+
+Each dropdown option the user chooses will change the webpage's elements.
+  - If the user chooses to do a Caesar cipher, the user can either input the "shift" integer, or use the increment buttons to the right of the text box to increase or decrease the shift integer by 1.
+  - If the user chooses to do an Affine cipher, the user can input two shift integers, A and B.
+      - A is a dropdown element, where the choices are integers coprime with 26.
+      - B is a textbox element, where the user can either input an integer, or use the increment buttons, similar to the Caesar cipher's "shift" integer input.
+  - If the user chooses to do a Vigenère cipher, the user is required to input a string key of at least length 2. Should the user not input a string key, it would return an error forcing the user to input one. Intrinsically, this is because the code would ultimately return an error regarding the divisibility of zero. Similarly, a key of only length 1 will just be equivalent to the Caesar cipher, with the "shift" integer being the alphabetical index of the letter in the key.
+
 ## Overview of the ciphers
 
 Take note of the following:
@@ -116,19 +131,3 @@ The resulting ciphertext is `egik`. For decryption, with the same key:
 Which results in the plaintext `abcd`.
 
 Note that the key's length does not necessarily have to be equal to the plaintext's length. For example, if the plaintext is `abcd` and the key is `ab`, then the cipher will use `abab` as the key. Similarly, if the plaintext is `abcd` and the key is `efghi`, then the cipher will use `efgh` as the key.
-
-## Instruction Manual
-
-The webpage has these elements:
-  - A dropdown that includes the three ciphers (Caesar, Affine, Vigenère) the user may use;
-  - A text field where the user can input a plaintext;
-  - An option to either encrypt or decrypt the text; and
-  - A button to process the text and encrypt/decrypt the plaintext with the set parameters.
-
-Each dropdown option the user chooses will change the webpage's elements.
-  - If the user chooses to do a Caesar cipher, the user can either input the "shift" integer, or use the increment buttons to the right of the text box to increase or decrease the shift integer by 1.
-  - If the user chooses to do an Affine cipher, the user can input two shift integers, A and B.
-      - A is a dropdown element, where the choices are integers coprime with 26.
-      - B is a textbox element, where the user can either input an integer, or use the increment buttons, similar to the Caesar cipher's "shift" integer input.
-  - If the user chooses to do a Vigenère cipher, the user is required to input a string key of at least length 2. Should the user not input a string key, it would return an error forcing the user to input one. Intrinsically, this is because the code would ultimately return an error regarding the divisibility of zero. Similarly, a key of only length 1 will just be equivalent to the Caesar cipher, with the "shift" integer being the alphabetical index of the letter in the key.
-
