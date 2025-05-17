@@ -20,7 +20,7 @@ Each dropdown option the user chooses will change the webpage's elements.
   - If the user chooses to do an Affine cipher, the user can input two shift integers, A and B.
       - A is a dropdown element, where the choices are integers coprime with 26.
       - B is a textbox element, where the user can either input an integer, or use the increment buttons, similar to the Caesar cipher's "shift" integer input.
-  - If the user chooses to do a Vigenère cipher, the user is required to input a string key of at least length 2. Should the user not input a string key, it would return an error forcing the user to input one. Intrinsically, this is because the code would ultimately return an error regarding the divisibility of zero. Similarly, a key of only length 1 will just be equivalent to the Caesar cipher, with the "shift" integer being the alphabetical index of the letter in the key.
+  - If the user chooses to do a Vigenère cipher, the user is required to input a string key of at least length 2. Should the user not input a string key, it would return an error forcing the user to input one. Intrinsically, this is because the cipher has no "key indeces" to work with. Similarly, a key of only length 1 will just be equivalent to the Caesar cipher, with the "shift" integer being the alphabetical index of the letter in the key.
 
 ## Overview of the ciphers
 
