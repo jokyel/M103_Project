@@ -51,22 +51,22 @@ def affine_cipher_D(text, shift1, shift2):
     return result
 
 def vigenere_cipher(text, key, mode='encrypt'):
-    result = []
+    result = ""
     key = key.lower()
     key_length = len(key)
-    if key_length == 0:
+    if key_length < 2:
         st.error("Please enter a key.")
         return ""
     key_indices = [ord(char) - ord('a') for char in key]
     
-    for i, char in enumerate(key):
-        if char.isalpha(): continue;
+    for char in key:
+        if char.isalpha(): continue
         else: 
             st.error("The key must only contain characters from the alphabet.")
             return ""
 
-
-    for i, char in enumerate(text):
+    i = 0
+    for char in text:
         if char.isalpha():
             is_upper = char.isupper()
             offset = ord('A') if is_upper else ord('a')
@@ -78,11 +78,12 @@ def vigenere_cipher(text, key, mode='encrypt'):
             elif mode == 'decrypt':
                 new_index = (char_index - key_index) % 26
             
-            result.append(chr(new_index + offset))
+            result += (chr(new_index + offset))
+            i += 1
         else:
-            result.append(char)
+            result += char
     
-    return ''.join(result)
+    return result
 
 st.title("M103 Project: Ciphers")
 st.subheader("This program serves as a playground to experiment with the three listed encryption techniques.")
