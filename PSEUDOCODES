@@ -1,0 +1,131 @@
+FUNCTION caesar_cipher(text,shift) #Caesar Cipher function pseudocode
+    DEFINE result as a string
+    SET result as empty string
+    FOR each character in text DO
+        IF character is an alphabet letter THEN
+            DEFINE is_upper as a boolean value
+            SET is_upper = character is uppercase
+            SET character = lowercase(character)
+            SET encrypted_character = character with alphabet index: (index(character) + shift) mod 26
+            IF is_upper = True THEN
+                SET result = result + uppercase(encrypted_character)
+            ELSE
+                SET result = result + encrypted_character
+        ELSE
+            SET result = result + character
+    END FOR
+    RETURN result
+END FUNCTION
+
+FUNCTION affine_cipher(text,A,B,mode = "encrypt") #Affine Cipher pseudocode
+    IF mode == "decrypt" THEN
+        SET A = modular inverse of A mod 26
+    DEFINE result as a string
+    SET result as empty string
+    DEFINE encrypted_char as character
+    FOR each character in text DO
+        IF character is an alphabet letter THEN
+            DEFINE is_upper as boolean value 
+            SET is_upper = character is uppercase
+            SET character = lowercase(character)
+            IF mode == "encrypt" THEN
+                SET encrypted_char = character with alphabet index: (A*index(character) + B) mod 26
+            ELSEIF mode == "decrypt" THEN
+                SET encrypted_char = character with alphabet index: (A*(index(character) - B)) mod 26
+            IF is_upper = True THEN
+                SET result = result + uppercase(encrypted_char)
+            ELSE
+                SET result = result + encrypted_char
+        ELSE
+            SET result = result + character
+    END FOR
+    RETURN result
+END FUNCTION
+
+FUNCTION vigenere_cipher (text, key, mode="encrypt") #Vigenère Cipher pseudocode
+    DEFINE result as string
+    SET result = empty string
+    DEFINE key_length as integer
+    SET key_length = length(key)
+
+    IF key_length == 0 THEN
+        RAISE ValueError: "Key must not be empty."
+    
+    DEFINE key_indeces as array
+    FOR each character in key DO
+        SET key_indeces = [index(character)]
+    END FOR
+    FOR each character in key DO
+        IF character is not an alphabet letter THEN
+            RAISE TypeError: "The key must only contain alphabet letters."
+    END FOR
+    DEFINE i as an integer AND SET i = 0
+
+    FOR each character in text DO
+        IF character is an alphabet letter THEN
+            DEFINE is_upper as a boolean value AND set is_upper = character is uppercase
+            character_index = index(character)
+            key_index = key_indeces[i modulo key_length]
+
+            IF mode == "encrypt" THEN
+                new_index = (character_index + key_index) modulo 26
+            ELSE IF mode == "decrypt" THEN
+                new_index = (character_index - key_index) modulo 26
+            IF is_upper == True THEN
+                result = result + uppercase(character with alphabet index: new_index)
+            ELSE
+	   result = result + character with alphabet index: new_index
+            i = i + 1
+        ELSE
+            result = result + character
+    END FOR
+    RETURN result
+END FUNCTION
+
+#Main pseudocode
+
+DISPLAY “M103 Project: Ciphers”
+DISPLAY "This program serves as a playground to experiment with the three listed encryption techniques."
+
+PROMPT user to select from Caesar, Affine, or Vigenère
+SET cipher as selection
+
+INPUT text
+
+PROMPT user to select from Encrypt or Decrypt
+SET action as selection
+
+DEFINE valid_a_values as array
+SET valid_a_values as all integers from 0 to 25 where gcd(x,26) = 1
+
+IF cipher == “Caesar” THEN
+    INPUT shift
+    IF user clicks "Process" THEN
+        SET shift as integer
+        IF action == "Encrypt" THEN
+            result = caesar_cipher(text,shift)
+        ELSE
+            result = caesar_cipher(text,-shift)
+        DISPLAY result
+
+ELSE IF cipher == "Affine" THEN
+    PROMPT user to select A in valid_a_values
+    INPUT B
+    DISPLAY "A must be coprime to 26."
+    IF user clicks "Process" THEN
+        IF action == "Encrypt" THEN
+            result = affine_cipher(text,A,B,"encrypt")
+        ELSE
+            result = affine_cipher(text,A,B,"decrypt")
+        DISPLAY result
+
+ELSE IF cipher == "Vigenère" THEN
+    INPUT key
+    IF user clicks "Process" THEN
+        IF action == "Encrypt" THEN
+            result = vigenere_cipher(text,key,"encrypt")
+        ELSE
+            result = vigenere_cipher(text,key,"decrypt")
+        DISPLAY result
+
+
